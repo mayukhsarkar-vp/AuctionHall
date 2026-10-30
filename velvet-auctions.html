@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Velvet Auctions · Velvet Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Karla:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a0a14;--panel:#2a1220;--panel2:#361829;--line:#5a2c44;--gold:#d9b25f;--gold2:#f0d68f;--ink:#f6ecde;--mute:#b79aa6;--bad:#ff8f8f;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:radial-gradient(ellipse at 20% -10%,#4a1636 0,var(--bg) 55%) fixed;color:var(--ink);font:400 16px/1.55 Karla,system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif;font-weight:700;margin:0}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;gap:12px}
+.brand{font:700 20px 'Playfair Display',serif;color:var(--gold)}
+.brand small{display:block;font:400 13px Karla,sans-serif;color:var(--mute)}
+button,.btn{font:600 15px Karla,sans-serif;cursor:pointer;border-radius:8px;border:1px solid var(--gold);background:var(--gold);color:#2a0f1c;padding:10px 18px}
+button:hover{background:var(--gold2)}
+button.ghost{background:transparent;color:var(--gold)}
+button.ghost:hover{background:#d9b25f22}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:28px 0 36px}
+.hero h1{font-size:clamp(34px,6vw,56px);line-height:1.08;font-weight:900}
+.hero p{color:var(--mute);max-width:46ch;margin:14px 0 22px}
+.feat{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.feat .pic{aspect-ratio:16/10}
+.feat .in{padding:16px 18px 18px}
+.big{font:900 clamp(30px,6vw,44px)/1 'Playfair Display',serif;color:var(--gold2);font-variant-numeric:tabular-nums;margin:6px 0 12px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 18px}
+.chip{background:transparent;color:var(--mute);border:1px solid var(--line);padding:6px 14px;border-radius:99px;font-size:14px}
+.chip.on{background:var(--gold);color:#2a0f1c;border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;padding-bottom:30px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.pic{aspect-ratio:4/3;background-size:cover;background-position:center;display:grid;place-items:center;font:900 64px 'Playfair Display',serif;color:#ffffff40}
+.card .in{padding:14px 15px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{font-size:19px;line-height:1.25}
+.meta{color:var(--mute);font-size:14px}
+.price{font:700 24px 'Playfair Display',serif;color:var(--gold2)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.t{font-variant-numeric:tabular-nums}
+.t.soon{color:var(--bad)}
+.card button{margin-top:auto}
+.fee{font-size:14px;color:var(--mute);background:#0003;border-radius:8px;padding:8px 10px}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:40px 0}
+.how{border-top:1px solid var(--line);padding:30px 0 50px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.how h3{font-size:19px;color:var(--gold);margin-bottom:6px}
+.how p{margin:0;color:var(--mute);font-size:15px}
+footer{color:var(--mute);font-size:13px;text-align:center;padding:0 0 30px}
+dialog{background:var(--panel);color:var(--ink);border:1px solid var(--gold);border-radius:14px;padding:22px;width:min(480px,calc(100vw - 24px));max-height:calc(100dvh - 24px)}
+dialog::backdrop{background:#000a}
+dialog h2{font-size:26px;margin-bottom:12px}
+label{display:block;font-size:14px;color:var(--mute);margin:12px 0 4px}
+input,select,textarea{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:400 16px Karla,sans-serif}
+textarea{resize:vertical;min-height:80px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.acts{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--gold);color:#2a0f1c;padding:10px 18px;border-radius:99px;font-weight:600;z-index:99;max-width:90vw;text-align:center}
+.toast[hidden]{display:none}
+.err{color:var(--bad);font-size:14px;min-height:20px;margin-top:6px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.how{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:no-preference){.hero h1{animation:rise .8s ease-out both}@keyframes rise{from{opacity:0;transform:translateY(12px)}}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="brand">Velvet Pages<small>Velvet Auctions</small></div>
+  <button id="sellBtn">List an item</button>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Bid on something one of a kind.</h1>
+    <p>Anyone can list a product on Velvet Auctions. Listing is free, and you only pay a small fee when your item sells.</p>
+    <button id="sellBtn2">Start selling</button>
+  </div>
+  <div class="feat" id="feat"></div>
+</section>
+
+<div class="bar" id="chips" role="group" aria-label="Categories"></div>
+<div class="grid" id="grid" aria-live="polite"></div>
+
+<section class="how">
+  <div><h3>List for free</h3><p>Add photos, details and a starting price in under a minute. No upfront payment.</p></div>
+  <div><h3>Bidders compete</h3><p>Each bid must beat the last one. When the timer ends, the highest bid wins.</p></div>
+  <div><h3>Pay only when sold</h3><p>The seller pays 3% of the final price (minimum ₹10). No bids means no fee.</p></div>
+</section>
+<footer>Built by Velvet Pages for Velvetians. Listings on this demo are saved in your own browser.</footer>
+</div>
+
+<dialog id="bidDlg">
+  <h2 id="bidTitle"></h2>
+  <div class="meta" id="bidInfo"></div>
+  <label for="bidName">Your name</label><input id="bidName" autocomplete="name" maxlength="40">
+  <label for="bidAmt">Your bid (₹)</label><input id="bidAmt" type="number" inputmode="numeric" min="1">
+  <div class="err" id="bidErr"></div>
+  <div class="acts"><button class="ghost" data-close>Cancel</button><button id="bidGo">Place bid</button></div>
+</dialog>
+
+<dialog id="sellDlg">
+  <h2>List an item</h2>
+  <label for="sTitle">Product name</label><input id="sTitle" maxlength="60">
+  <div class="two">
+    <div><label for="sCat">Category</label><select id="sCat"></select></div>
+    <div><label for="sDur">Auction length</label><select id="sDur"><option value="1">1 hour</option><option value="6">6 hours</option><option value="24" selected>1 day</option><option value="72">3 days</option><option value="168">7 days</option></select></div>
+  </div>
+  <label for="sDesc">Details</label><textarea id="sDesc" maxlength="500" placeholder="Condition, size, age, anything a buyer should know"></textarea>
+  <div class="two">
+    <div><label for="sPrice">Starting price (₹)</label><input id="sPrice" type="number" inputmode="numeric" min="1"></div>
+    <div><label for="sPhoto">Photo</label><input id="sPhoto" type="file" accept="image/*"></div>
+  </div>
+  <div class="two">
+    <div><label for="sName">Your name</label><input id="sName" maxlength="40" autocomplete="name"></div>
+    <div><label for="sContact">WhatsApp number</label><input id="sContact" inputmode="tel" maxlength="20" autocomplete="tel"></div>
+  </div>
+  <p class="fee" id="feeNote">Listing is free. You pay 3% (minimum ₹10) only if your item sells.</p>
+  <div class="err" id="sellErr"></div>
+  <div class="acts"><button class="ghost" data-close>Cancel</button><button id="sellGo">Publish listing</button></div>
+</dialog>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const CFG={upi:'velvetpages@upi',feePct:3,feeMin:10}; // set your own UPI ID here
+const CATS=['Fashion','Home','Books','Collectibles','Electronics','Art'];
+const KEY='vp_auctions_v1';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const inr=n=>'₹'+Number(n).toLocaleString('en-IN');
+const hue={Fashion:330,Home:25,Books:210,Collectibles:45,Electronics:190,Art:280};
+let A=load(),cat='All',openId=null;
+
+function seed(){const n=Date.now(),h=3600e3;
+ const mk=(i,title,c,start,hrs,desc,seller,bids)=>({id:'s'+i,title,cat:c,start,end:n+hrs*h,desc,seller,contact:'',img:'',bids:bids||[]});
+ return[
+  mk(1,'Banarasi silk saree, ivory and gold','Fashion',4500,5,'Handwoven brocade, worn once. Comes with the original blouse piece.','Meera K.',[{name:'Anita',amt:5200,t:n-h}]),
+  mk(2,'Murphy valve radio, 1960s','Collectibles',3000,26,'Restored cabinet, working AM band. A proper conversation piece.','Rohit S.'),
+  mk(3,'Pashmina shawl, hand embroidered','Fashion',6000,50,'Kashmiri pashmina with sozni embroidery along the border.','Zainab R.',[{name:'Kabir',amt:6500,t:n-2*h},{name:'Isha',amt:7000,t:n-h}]),
+  mk(4,'Brass diya set of five','Home',900,2,'Hand-cast brass lamps, polished and ready for Diwali.','Vikram P.',[{name:'Neha',amt:1100,t:n-h}]),
+  mk(5,'First edition Malgudi Days','Books',2500,70,'Good condition, light foxing on endpapers, no markings.','Arun D.'),
+  mk(6,'Madhubani painting, 18 × 24 in','Art',3500,30,'Natural pigments on handmade paper, signed by the artist.','Sunita J.')
+ ]}
+function load(){try{const s=localStorage.getItem(KEY);if(s)return JSON.parse(s)}catch(e){}return seed()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(A))}catch(e){toast('Storage is full. Try a smaller photo.')}}
+const cur=a=>a.bids.length?a.bids[a.bids.length-1].amt:a.start;
+const inc=c=>Math.max(10,Math.round(c*.05/10)*10);
+const minBid=a=>a.bids.length?cur(a)+inc(cur(a)):a.start;
+const fee=p=>Math.max(CFG.feeMin,Math.round(p*CFG.feePct/100));
+const live=a=>a.end>Date.now();
+function left(ms){if(ms<=0)return'Ended';const s=Math.floor(ms/1e3),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60;
+ return d?`${d}d ${h}h ${m}m`:h?`${h}h ${m}m ${x}s`:`${m}m ${x}s`}
+function pic(a,cls=''){const st=a.img?`background-image:url(${a.img})`:`background-image:linear-gradient(145deg,hsl(${hue[a.cat]||330} 45% 28%),hsl(${(hue[a.cat]||330)+30} 50% 12%))`;
+ return`<div class="pic ${cls}" style="${st}" role="img" aria-label="${esc(a.title)}">${a.img?'':esc(a.title[0])}</div>`}
+function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.k);toast.k=setTimeout(()=>t.hidden=true,3200)}
+
+function chips(){$('#chips').innerHTML=['All',...CATS].map(c=>`<button class="chip ${c===cat?'on':''}" data-cat="${c}">${c}</button>`).join('')}
+function card(a){
+ const on=live(a),n=a.bids.length;let body;
+ if(on)body=`<div class="row"><span class="meta">${n?'Current bid':'Starting bid'}</span><span class="meta">${n} bid${n===1?'':'s'}</span></div>
+  <div class="price">${inr(cur(a))}</div>
+  <div class="row"><span class="meta">Ends in</span><span class="t" data-end="${a.end}">${left(a.end-Date.now())}</span></div>
+  <button data-bid="${a.id}">Place a bid</button>`;
+ else if(n){const w=a.bids[n-1];body=`<div class="meta">Sold to ${esc(w.name)}</div><div class="price">${inr(w.amt)}</div>
+  <div class="fee">Seller fee: ${inr(fee(w.amt))}, due now.</div><button class="ghost" data-fee="${a.id}">Pay fee by UPI</button>`}
+ else body=`<div class="meta">Ended with no bids</div><div class="fee">No sale, so no fee.</div>`;
+ return`<article class="card">${pic(a)}<div class="in"><h3>${esc(a.title)}</h3><div class="meta">${esc(a.cat)} · by ${esc(a.seller)}</div>${body}</div></article>`}
+function render(){
+ const list=A.filter(a=>cat==='All'||a.cat===cat).sort((x,y)=>(live(y)-live(x))||(live(x)?x.end-y.end:y.end-x.end));
+ $('#grid').innerHTML=list.length?list.map(card).join(''):'<div class="empty">Nothing here yet. Be the first to list in this category.</div>';
+ const f=A.filter(live).sort((x,y)=>x.end-y.end)[0];
+ $('#feat').innerHTML=f?`${pic(f)}<div class="in"><div class="meta">Ending soonest</div><h2 style="font-size:22px">${esc(f.title)}</h2>
+  <div class="big t" data-end="${f.end}">${left(f.end-Date.now())}</div>
+  <div class="row"><span class="price">${inr(cur(f))}</span><button data-bid="${f.id}">Place a bid</button></div></div>`
+  :'<div class="in"><h2>No live auctions</h2><p class="meta">List an item to get things started.</p></div>';
+}
+setInterval(()=>{let ended=false;document.querySelectorAll('.t[data-end]').forEach(e=>{const ms=e.dataset.end-Date.now();if(ms<=0)ended=true;e.textContent=left(ms);e.classList.toggle('soon',ms>0&&ms<36e5)});if(ended)render()},1000);
+
+document.addEventListener('click',e=>{
+ const t=e.target.closest('button');if(!t)return;
+ if(t.dataset.cat){cat=t.dataset.cat;chips();render()}
+ else if(t.dataset.bid)openBid(t.dataset.bid);
+ else if(t.dataset.fee)payFee(t.dataset.fee);
+ else if(t.hasAttribute('data-close'))t.closest('dialog').close();
+});
+function openBid(id){const a=A.find(x=>x.id===id);if(!a||!live(a))return render();openId=id;
+ $('#bidTitle').textContent=a.title;$('#bidInfo').textContent=`${a.bids.length?'Current bid':'Starting bid'} ${inr(cur(a))}. Minimum bid ${inr(minBid(a))}.`;
+ $('#bidAmt').value=minBid(a);$('#bidErr').textContent='';$('#bidDlg').showModal()}
+$('#bidGo').onclick=()=>{const a=A.find(x=>x.id===openId),name=$('#bidName').value.trim(),amt=Math.round(+$('#bidAmt').value);
+ if(!a||!live(a)){$('#bidDlg').close();return render()}
+ if(!name)return $('#bidErr').textContent='Enter your name so the seller knows who won.';
+ if(!(amt>=minBid(a)))return $('#bidErr').textContent=`Your bid must be at least ${inr(minBid(a))}.`;
+ a.bids.push({name,amt,t:Date.now()});if(a.end-Date.now()<12e4)a.end+=12e4; // late bids extend by 2 minutes
+ save();$('#bidDlg').close();render();toast(`Bid placed: ${inr(amt)}`)};
+function payFee(id){const a=A.find(x=>x.id===id),p=a.bids[a.bids.length-1].amt;
+ const url=`upi://pay?pa=${encodeURIComponent(CFG.upi)}&pn=Velvet%20Pages&am=${fee(p)}&cu=INR&tn=${encodeURIComponent('Fee: '+a.title)}`;
+ location.href=url;toast(`Opening your UPI app for ${inr(fee(p))}`)}
+
+// Sell
+$('#sCat').innerHTML=CATS.map(c=>`<option>${c}</option>`).join('');
+function openSell(){$('#sellErr').textContent='';$('#sellDlg').showModal()}
+$('#sellBtn').onclick=$('#sellBtn2').onclick=openSell;
+$('#sPrice').oninput=()=>{const p=+$('#sPrice').value;$('#feeNote').textContent=p>0?`If it sells at ${inr(p)}, your fee is ${inr(fee(p))}. If it doesn’t sell, you pay nothing.`:'Listing is free. You pay 3% (minimum ₹10) only if your item sells.'};
+function shrink(file){return new Promise((ok,no)=>{const r=new FileReader();r.onerror=no;r.onload=()=>{const i=new Image();i.onerror=no;i.onload=()=>{const k=Math.min(1,720/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',.7))};i.src=r.result};r.readAsDataURL(file)})}
+$('#sellGo').onclick=async()=>{
+ const v=id=>$(id).value.trim(),title=v('#sTitle'),price=Math.round(+$('#sPrice').value),name=v('#sName'),contact=v('#sContact'),err=m=>$('#sellErr').textContent=m;
+ if(!title)return err('Add a product name.');
+ if(!(price>0))return err('Set a starting price above ₹0.');
+ if(!name||!contact)return err('Add your name and WhatsApp number so the winner can reach you.');
+ let img='';const f=$('#sPhoto').files[0];
+ if(f){try{img=await shrink(f)}catch(e){return err('That photo couldn’t be read. Try a JPG or PNG.')}}
+ A.push({id:'u'+Date.now(),title,cat:$('#sCat').value,start:price,end:Date.now()+(+$('#sDur').value)*36e5,desc:v('#sDesc'),seller:name,contact,img,bids:[]});
+ save();$('#sellDlg').close();['#sTitle','#sDesc','#sPrice','#sPhoto'].forEach(s=>$(s).value='');cat='All';chips();render();toast('Your item is live.')};
+chips();render();
+</script>
+</body>
+</html>
